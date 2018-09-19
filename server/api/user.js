@@ -51,7 +51,9 @@ module.exports = (app, db) => {
         collection.findOne(req.body, (err, result) => {
           if (result) {
             res.cookie('user', result._id, { expires: new Date(Date.now() + 900000), httpOnly: true });
-            
+              req.session.userName = result.userName;
+              req.session.userId = result._id
+
             res.status(200).json({
               status: 0,
               userName: result.userName,

@@ -8,7 +8,7 @@ export function addJourney ({commit,dispatch}, info) {
         commit('UPDATE_POPUP_TEXT', '发布成功')
         filter.popupShow(commit)
       }
-      
+
   }, response => {
       // error callback
   })
@@ -32,5 +32,15 @@ export function getJourneyInfo ({commit,dispatch}, info) {
       }
   }, response => {
       // error callback
+  })
+}
+
+export function updateJourneyInfo ({commit,dispatch}, info) {
+  vm.$http.put(`/api/journey/${info.id}`, info).then(response => {
+    if (response.data.status === 0) {
+      info.callback && info.callback(response)
+    }
+  }, response => {
+    // error callback
   })
 }

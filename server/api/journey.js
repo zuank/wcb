@@ -25,8 +25,6 @@ module.exports = (app, db) => {
             status: 0,
             list: result
           });
-          req.session.userName = result.userName;
-          req.session.userId = result._id
         } else {
           res.status(200).json({
             status: 1,
@@ -67,6 +65,10 @@ module.exports = (app, db) => {
             }
             collection.update({
                 _id: ObjectId(req.params.id)
+            },{
+              $addToSet:{
+                "userId":req.session.userId
+              }
             }, (err, result) => {
                 if (result) {
                     res.status(200).json({

@@ -28,7 +28,7 @@
       {{discription}}
     </mu-card-text>
     <mu-card-actions>
-      <mu-flat-button label="Action 1"/>
+      <mu-flat-button @click="updateJourneyInfo" label="Action 1"/>
       <mu-flat-button label="Action 2"/>
     </mu-card-actions>
   </mu-card>
@@ -65,6 +65,14 @@ export default {
   methods: {
     back() {
       this.$router.push('/')
+    },
+    updateJourneyInfo() {
+      this.$store.dispatch('updateJourneyInfo',{
+        id: this.route.params.id,
+        callback: (res) => {
+
+        }
+      })
     }
   }
 }
