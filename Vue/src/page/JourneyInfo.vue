@@ -38,7 +38,7 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  name: 'Journey',
+  name: 'journey',
   created(){
     this.$store.dispatch('getJourneyInfo', {
       id: this.route.params.id,

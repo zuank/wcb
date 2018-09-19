@@ -8,17 +8,17 @@
 <div class="JourneyEdit">
   <mu-sub-header>新增行程</mu-sub-header>
   <mu-content-block>
-    行程名称<mu-text-field v-model="name" hintText="行程名称" type="text"/><br/>
+    <mu-text-field fullWidth v-model="name" label="行程名称" hintText="行程名称" type="text"/>
 
-    电话号码<mu-text-field v-model="tel" hintText="电话号码" type="number"/><br/>
+    <mu-text-field fullWidth v-model="tel" label="电话号码" hintText="电话号码" type="number"/>
 
-    出发时间<mu-date-picker v-model="goDate" hintText="出发时间"/> <br/>
+    <mu-date-picker fullWidth v-model="goDate" label="出发时间" hintText="出发时间"/>
 
-    返回时间<mu-date-picker v-model="backDate" hintText="返回时间"/> <br/>
+    <mu-date-picker fullWidth v-model="backDate" label="返回时间" hintText="返回时间"/>
 
-    预订截止时间<mu-date-picker v-model="stopDate" hintText="预订截止时间"/> <br/>
+    <mu-date-picker fullWidth v-model="stopDate" label="预订截止时间" hintText="预订截止时间"/>
 
-    行程说明<mu-text-field v-model="discription" hintText="行程说明" multiLine :rows="3" :rowsMax="6"/><br/>
+    <mu-text-field fullWidth v-model="discription" label="行程说明" hintText="行程说明" multiLine :rows="3" :rowsMax="6"/>
 
     <p style="text-align: center;">
       <mu-raised-button label="发布" @click="toPublish" secondary/>
@@ -31,7 +31,7 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  name: 'JourneyEdit',
+  name: 'journeyEdit',
   data(){
     return {
       name:'',

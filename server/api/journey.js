@@ -43,7 +43,7 @@ module.exports = (app, db) => {
         return;
       }
       collection.findOne({
-        _id: ObjectId('5ac232666c18fd08b0d0d49e')
+        _id: ObjectId(req.params.id)
       }, (err, result) => {
         if (result) {
           res.status(200).json({
@@ -59,4 +59,27 @@ module.exports = (app, db) => {
       });
     });
   });
+
+    app.put('/api/journey/:id', (req, res) => {
+        db.collection('journey', (error, collection) => {
+            if (error) {
+                return;
+            }
+            collection.update({
+                _id: ObjectId(req.params.id)
+            }, (err, result) => {
+                if (result) {
+                    res.status(200).json({
+                        status: 0,
+                        result: result
+                    })
+                } else {
+                    res.status(200).json({
+                        status: 1,
+                        error: '行程不存在'
+                    });
+                }
+            });
+        });
+    });
 };

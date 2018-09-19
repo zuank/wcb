@@ -22,7 +22,7 @@ export default new Router({
         component: () => import('@/page/List')
       }, {
         path:'newJourney',
-        name: 'JourneyEdit',
+        name: 'newJourney',
         component: () => import('@/page/JourneyEdit')
       }, {
         path:'journeyEdit/:id',

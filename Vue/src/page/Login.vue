@@ -20,7 +20,7 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  name: 'Login',
+  name: 'login',
   data(){
     return {
       userName:'',
@@ -45,7 +45,7 @@ export default {
         userName: this.userName,
         password: this.password,
         callback: (res) => {
-          
+
         }
       })
     }

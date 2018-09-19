@@ -22,25 +22,26 @@
       <mu-divider inset/>
     </template>
   </mu-list>
-  <mu-infinite-scroll :scroller="scroller" :loading="loading" loadingText='加载中...'/>
+  <!--<mu-infinite-scroll :scroller="scroller" :loading="loading" loadingText='加载中...' @load="loadMore"/>-->
 </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
 export default {
-  name: 'List',
+  name: 'list',
   created() {
-    // this.$store.dispatch('getJourneys')
+    this.$store.dispatch('getJourneys',{})
     this.$store.dispatch('getUserInfo')
   },
   data(){
     return {
-      loading: true,
+      loading: false,
       scroller: null
     }
   },
   mounted () {
+    console.log(this.$el)
     this.scroller = this.$el
   },
   computed: {
@@ -52,6 +53,9 @@ export default {
   methods: {
     journeyInfo (id) {
       this.$router.push(`/journeyInfo/${id}`)
+    },
+    loadMore() {
+      this.loading = true
     }
   }
 }
