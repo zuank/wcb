@@ -1,5 +1,6 @@
-const ObjectId = require('mongodb').ObjectID
-module.exports = (app, db) => {
+const ObjectId = require('mongodb').ObjectID;
+const db = require('../db');
+module.exports = (app) => {
     app.post('/api/journey', (req, res) => {
         db.collection('journey', (error, collection) => {
             if (error) {
