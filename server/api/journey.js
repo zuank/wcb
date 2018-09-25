@@ -1,18 +1,20 @@
 const ObjectId = require('mongodb').ObjectID;
 const db = require('../db');
+const dbCollection = require('../dbAPI/journey');
+
 module.exports = (app) => {
     app.post('/api/journey', (req, res) => {
-        db.collection('journey', (error, collection) => {
-            if (error) {
-                return;
-            }
-            collection.insert(req.body, (error_, result) => {
-                res.status(200).json({
-                    status: 0,
-                    id: result._id
-                });
-            });
-        });
+        dbCollection.journeyInsert(req.body,(result)=>{
+            res.status(200).json({
+                status: 0,
+                id: result._id
+            })
+        },()=>{
+            res.status(200).json({
+                status: -1,
+                msg: '注册失败'
+            })
+        })
     });
 
     app.get('/api/journeys', (req, res) => {
