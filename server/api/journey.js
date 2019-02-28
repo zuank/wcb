@@ -30,6 +30,13 @@ module.exports = (app, db) => {
     });
 
 
+    /**
+     * 获取行程列表
+     * req: {
+     *  limit: Number
+     *  page: Number
+     * }
+     */
     app.get('/api/journeys', (req, res) => {
         db.collection('journey', (error, collection) => {
             if (error) {
@@ -42,9 +49,12 @@ module.exports = (app, db) => {
                     localField: "userId",
                     foreignField: '_id',
                     as: "inventory_docs"
-                }
+                },
+                // $unwind: {
+                //     path: "$inventory_docs"
+                // }
+
             }]).toArray((err, result) => {
-                console.log(result);
                 if (result) {
                     res.status(200).json({
                         status: 0,
@@ -53,7 +63,7 @@ module.exports = (app, db) => {
                 } else {
                     res.status(200).json({
                         status: 1,
-                        error: '用户名不存在或密码错误'
+                        error: err
                     });
                 }
             })
@@ -67,7 +77,7 @@ module.exports = (app, db) => {
             //     } else {
             //         res.status(200).json({
             //             status: 1,
-            //             error: '用户名不存在或密码错误'
+            //             error: ''
             //         });
             //     }
             // });
