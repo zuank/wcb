@@ -1,4 +1,5 @@
 const ObjectId = require('mongodb').ObjectID
+
 function checkLogin(req, res, next) {
   if (!req.session.userName) {
     req.flash('error', '用户未登录！');
@@ -6,13 +7,13 @@ function checkLogin(req, res, next) {
   }
   next();
 }
-
 function checkNotLogin(req, res, next) {
   if (req.session.userName) {
     req.flash('error', '用户已登录！');
   }
   next();
 }
+
 module.exports = (app, db) => {
   app.post('/api/reg', (req, res) => {
     if (req.body.userName === '') {
@@ -74,8 +75,7 @@ module.exports = (app, db) => {
   });
 
   app.get('/api/user/info', (req, res) => {
-
-    const userId = req.cookies.user
+    const userId = req.session.userId;
     db.collection('user', (error, collection) => {
       if (error) {
         return;
@@ -84,7 +84,10 @@ module.exports = (app, db) => {
         if (result) {
           res.status(200).json({
             status: 0,
-            result: result
+            result: {
+              userName: result.userName,
+              userId: result._id
+            }
           });
           return
         } else {

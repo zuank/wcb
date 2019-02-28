@@ -1,7 +1,7 @@
 const db = require('../db');
-const dbName = 'journey';
+const dbName = 'user';
 
-function insert(params, successCallback, errorCallback) {
+function journeyInsert(params, successCallback, errorCallback) {
     db.collection(dbName, (error, collection) => {
         if (error) {
             return;
@@ -16,7 +16,7 @@ function insert(params, successCallback, errorCallback) {
     });
 }
 
-function find(params, successCallback, errorCallback) {
+function journeyFind(params, successCallback, errorCallback) {
     db.collection(dbName, (error, collection) => {
         if (error) {
             return;
@@ -32,6 +32,6 @@ function find(params, successCallback, errorCallback) {
 }
 
 module.exports = {
-    insert,
-    find
+    journeyInsert,
+    journeyFind
 }
