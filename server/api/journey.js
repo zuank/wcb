@@ -96,13 +96,78 @@ module.exports = (app, db) => {
             if (error) {
                 return;
             }
-            collection.findOne({
-                _id: ObjectId(req.params.id)
-            }, (err, result) => {
+
+            collection.aggregate([
+                {
+                    $match: {
+                        _id: ObjectId(req.params.id)
+                    }
+                },
+                {
+                    $unwind: {
+                        path: '$joinedUserId',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'user',
+                        localField: 'joinedUserId',
+                        foreignField: '_id',
+                        as: 'userInfo'
+                    }
+                },
+                {
+                    $unwind: {
+                        path: '$userInfo',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                  $project: {
+                      backDate: 1,
+                      discription: 1,
+                      goDate: 1,
+                      name: 1,
+                      stopDate: 1,
+                      tel: 1,
+                      userId: 1,
+                      "userInfo.userName":'$userInfo.userName',
+                      "userInfo._id":'$userInfo._id',
+                  }
+                },
+                {
+                    $group: {
+                        _id: {
+                            backDate: "$backDate",
+                            discription: "$discription",
+                            goDate: "$goDate",
+                            name: "$name",
+                            stopDate: "$stopDate",
+                            tel: "$tel",
+                            userId: "$userId",
+                        },
+                        joinedUserList: {$push: "$userInfo"}
+                    }
+                },
+                {
+                    $project:{
+                        _id:0,
+                        backDate: "$_id.backDate",
+                        discription: "$_id.discription",
+                        goDate: "$_id.goDate",
+                        name: "$_id.name",
+                        stopDate: "$_id.stopDate",
+                        tel: "$_id.tel",
+                        userId: "$_id.userId",
+                        joinedUserList: '$joinedUserList'
+                    }
+                }
+            ]).toArray((err, result) => {
                 if (result) {
                     res.status(200).json({
                         status: 0,
-                        result: result
+                        result: result[0]
                     })
                 } else {
                     res.status(200).json({
