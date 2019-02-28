@@ -10,7 +10,8 @@ module.exports = (app, db) => {
 
             const params = {
                 ...req.body,
-                userId: ObjectId(req.session.userId)
+                userId: ObjectId(req.session.userId),
+                createTime: new Date()
             };
 
             collection.insert(params, (error_, result) => {
@@ -43,18 +44,38 @@ module.exports = (app, db) => {
                 return;
             }
 
-            collection.aggregate([{
-                $lookup: {
-                    from: "user",
-                    localField: "userId",
-                    foreignField: '_id',
-                    as: "inventory_docs"
+            // $skip 跳过多少个文档
+            // $limit 取多少个文档
+            collection.aggregate([
+                {$skip: (req.limit * (req.page - 1)) || 0},
+                {$limit: req.limit || 10},
+                {
+                    $lookup: {
+                        from: 'user',
+                        localField: 'userId',
+                        foreignField: '_id',
+                        as: 'userInfo'
+                    }
                 },
-                // $unwind: {
-                //     path: "$inventory_docs"
-                // }
-
-            }]).toArray((err, result) => {
+                {
+                    $unwind: {
+                        path: '$userInfo',
+                        preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $project: {
+                        backDate: 1,
+                        direction: 1,
+                        goDate: 1,
+                        name: 1,
+                        stopDate: 1,
+                        tel: 1,
+                        userId: 1,
+                        userName: '$userInfo.userName'
+                    }
+                }
+            ]).toArray((err, result) => {
                 if (result) {
                     res.status(200).json({
                         status: 0,
@@ -67,20 +88,6 @@ module.exports = (app, db) => {
                     });
                 }
             })
-
-            // collection.find().toArray((err, result) => {
-            //     if (result) {
-            //         res.status(200).json({
-            //             status: 0,
-            //             list: result
-            //         });
-            //     } else {
-            //         res.status(200).json({
-            //             status: 1,
-            //             error: ''
-            //         });
-            //     }
-            // });
         });
     });
 
