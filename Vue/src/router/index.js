@@ -15,23 +15,23 @@ export default new Router({
       children:[{
         path: 'login',
         name: 'Login',
-        component: () => import('@/page/Login')
+        component: () => import('@/page/login')
       }, {
-        path:'publishedList',
-        name: 'publishedList',
-        component: () => import('@/page/List')
+        path:'journey-list',
+        name: 'JourneyList',
+        component: () => import('@/page/journey-list')
       }, {
-        path:'newJourney',
-        name: 'newJourney',
-        component: () => import('@/page/JourneyEdit')
+        path:'journey-add',
+        name: 'journeyAdd',
+        component: () => import('@/page/journey-edit')
       }, {
-        path:'journeyEdit/:id',
-        name: 'JourneyEdit',
-        component: () => import('@/page/JourneyEdit')
+        path:'journey-update/:id',
+        name: 'journeyUpdate',
+        component: () => import('@/page/journey-edit')
       }, {
-        path:'journeyInfo/:id',
+        path:'journey-info/:id',
         name: 'JourneyInfo',
-        component: () => import('@/page/JourneyInfo')
+        component: () => import('@/page/journey-info')
       }]
     }
   ]

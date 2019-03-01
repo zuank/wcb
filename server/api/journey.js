@@ -2,6 +2,12 @@ const ObjectId = require('mongodb').ObjectID;
 
 module.exports = (app, db) => {
 
+    /**
+     * 发布行程
+     * req: {
+     *
+     * }
+     */
     app.post('/api/journey', (req, res) => {
         db.collection('journey', (error, collection) => {
             if (error) {
@@ -91,6 +97,14 @@ module.exports = (app, db) => {
         });
     });
 
+
+    /**
+     * 获取行程详情
+     * id 行程id
+     * req: {
+     *
+     * }
+     */
     app.get('/api/journey/:id', (req, res) => {
         db.collection('journey', (error, collection) => {
             if (error) {
@@ -124,17 +138,17 @@ module.exports = (app, db) => {
                     }
                 },
                 {
-                  $project: {
-                      backDate: 1,
-                      discription: 1,
-                      goDate: 1,
-                      name: 1,
-                      stopDate: 1,
-                      tel: 1,
-                      userId: 1,
-                      "userInfo.userName":'$userInfo.userName',
-                      "userInfo._id":'$userInfo._id',
-                  }
+                    $project: {
+                        backDate: 1,
+                        discription: 1,
+                        goDate: 1,
+                        name: 1,
+                        stopDate: 1,
+                        tel: 1,
+                        userId: 1,
+                        "userInfo.userName": '$userInfo.userName',
+                        "userInfo._id": '$userInfo._id',
+                    }
                 },
                 {
                     $group: {
@@ -151,8 +165,8 @@ module.exports = (app, db) => {
                     }
                 },
                 {
-                    $project:{
-                        _id:0,
+                    $project: {
+                        _id: 0,
                         backDate: "$_id.backDate",
                         discription: "$_id.discription",
                         goDate: "$_id.goDate",
@@ -179,7 +193,14 @@ module.exports = (app, db) => {
         });
     });
 
-    app.put('/api/journey/:id', (req, res) => {
+    /**
+     * 加入到别人发布的行程中
+     * id  当前登录用户的userId
+     * req: {
+     *
+     * }
+     */
+    app.put('/api/joinJourney/:id', (req, res) => {
 
         db.collection('journey', (error, collection) => {
             if (error) {

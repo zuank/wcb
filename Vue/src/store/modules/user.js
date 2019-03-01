@@ -3,6 +3,8 @@ export default {
     userName: ''
   },
   mutations: {
-    
+    'UPDATE_USER_NAME' (state, bol) {
+      state.userName = bol;
+    }
   }
 };

@@ -31,28 +31,38 @@ import {mapState} from 'vuex'
 export default {
   name: 'list',
   created() {
-    this.$store.dispatch('getJourneys',{})
-    this.$store.dispatch('getUserInfo')
+    this.getList();
   },
   data(){
     return {
       loading: false,
-      scroller: null
+      scroller: null,
+      journeyList: []
     }
   },
   mounted () {
-    console.log(this.$el)
     this.scroller = this.$el
   },
   computed: {
-    ...mapState(['route', 'journey', 'user']),
-    journeyList:function(){
-      return this.journey.publishedList
-    }
+    ...mapState(['route', 'user']),
   },
   methods: {
     journeyInfo (id) {
-      this.$router.push(`/journeyInfo/${id}`)
+      this.$router.push({
+        name:'JourneyInfo',
+        params:{
+          id
+        }
+      })
+    },
+    getList(){
+      this.$http.get('/api/journeys').then(response => {
+        if (response.data.status === 0) {
+          this.journeyList = response.data.list;
+        }
+      }, response => {
+        // error callback
+      })
     },
     loadMore() {
       this.loading = true

@@ -1,8 +1,5 @@
 <template>
   <div class="app">
-    <mu-popup position="top" :overlay="false" class="popup-top" v-show="popup.popupShow" :open="popup.popupShow">
-      {{popup.popupText}}
-    </mu-popup>
     <mu-appbar title="WCB">
       <!-- <mu-icon-button v-show="route.name !== 'Login'" icon="menu" slot="left"/> -->
     </mu-appbar>
@@ -30,12 +27,15 @@ export default {
     }
   },
   computed: {
-    ...mapState(['route','popup'])
+    ...mapState(['route'])
   },
   methods: {
     handleChange (val) {
       this.bottomNav = val
     }
+  },
+  created() {
+    this.$store.dispatch('getUserInfo');
   }
 }
 </script>

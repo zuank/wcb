@@ -38,16 +38,9 @@
 <script>
 import {mapState} from 'vuex'
 export default {
-  name: 'journey',
+  name: 'journey-info',
   created(){
-    this.$store.dispatch('getJourneyInfo', {
-      id: this.route.params.id,
-      callback: (res) => {
-        if (res.data.status === 0) {
-          Object.assign(this,res.data.result)
-        }
-      }
-    })
+    this.getJourneyInfo();
   },
   data(){
     return {
@@ -66,12 +59,23 @@ export default {
     back() {
       this.$router.push('/')
     },
-    updateJourneyInfo() {
-      this.$store.dispatch('updateJourneyInfo',{
-        id: this.route.params.id,
-        callback: (res) => {
-
+    getJourneyInfo(){
+      this.$http.get(`/api/journey/${this.route.params.id}`).then(response => {
+        if (response.data.status === 0) {
+          Object.assign(this,response.data.result)
         }
+      }, response => {
+        // error callback
+      })
+    },
+
+    updateJourneyInfo() {
+      this.$http.put(`/api/joinJourney/${this.route.params.id}`).then(response => {
+        if (response.data.status === 0) {
+          this.getJourneyInfo();
+        }
+      }, response => {
+        // error callback
       })
     }
   }
