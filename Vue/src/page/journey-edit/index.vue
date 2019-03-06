@@ -7,24 +7,24 @@
 <template>
 <div class="JourneyEdit">
   <mu-sub-header>新增行程</mu-sub-header>
-  <mu-content-block>
+  <mu-container>
     <mu-text-field fullWidth v-model="name" label="行程名称" hintText="行程名称" type="text"/>
 
     <mu-text-field fullWidth v-model="tel" label="电话号码" hintText="电话号码" type="number"/>
 
-    <mu-date-picker fullWidth v-model="goDate" label="出发时间" hintText="出发时间"/>
+    <mu-date-input fullWidth v-model="goDate" label="出发时间" hintText="出发时间"/>
 
-    <mu-date-picker fullWidth v-model="backDate" label="返回时间" hintText="返回时间"/>
+    <mu-date-input fullWidth v-model="backDate" label="返回时间" hintText="返回时间"/>
 
-    <mu-date-picker fullWidth v-model="stopDate" label="预订截止时间" hintText="预订截止时间"/>
+    <mu-date-input fullWidth v-model="stopDate" type="dateTime" label-float full-width landscape label="预订截止时间" hintText="预订截止时间"/>
 
     <mu-text-field fullWidth v-model="discription" label="行程说明" hintText="行程说明" multiLine :rows="3" :rowsMax="6"/>
 
     <p style="text-align: center;">
-      <mu-raised-button label="发布" @click="toPublish" secondary/>
-      <mu-raised-button label="取消" @click="back" secondary/>
+      <mu-button color="primary" @click="toPublish" secondary>发布</mu-button>
+      <mu-button color="primary" @click="back" secondary>取消</mu-button>
     </p>
-  </mu-content-block>
+  </mu-container>
 </div>
 </template>
 
@@ -68,6 +68,9 @@ export default {
     back() {
       this.$router.push('/')
     }
+  },
+  created() {
+    console.log(this);
   }
 }
 </script>

@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "muse-ui": "^3.0.2",
+    "muse-ui-toast": "^0.3.0",
     "vue": "^2.6.7",
     "vue-router": "^3.0.2",
     "vuex": "^3.1.0",

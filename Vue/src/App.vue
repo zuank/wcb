@@ -6,7 +6,8 @@
     </div>
     <mu-paper class="paper-bottom" v-show="route.name !== 'Login'">
       <mu-bottom-nav :value="route.name" shift @change="handleChange">
-        <mu-bottom-nav-item value="JourneyList" title="ALL" icon="view_list"/>
+        <mu-bottom-nav-item value="JourneyList" title="ALL JOURNEY" icon="view_list"/>
+        <mu-bottom-nav-item value="journeyAdd" title="ADD JOURNEY" icon="playlist_add"/>
         <mu-bottom-nav-item value="person" title="MY" icon="person"/>
       </mu-bottom-nav>
     </mu-paper>
