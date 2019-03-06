@@ -12,8 +12,8 @@
       <br/>
       <mu-text-field v-model="password" label="密码" type="password" labelFloat/>
       <br/>
-      <mu-raised-button label="登录" @click="goLogin" secondary/>
-      <mu-raised-button label="注册" @click="goReg" secondary/>
+      <mu-button color="primary" @click="goLogin">登录</mu-button>
+      <mu-button color="primary" @click="goReg">注册</mu-button>
     </div>
 
   </div>

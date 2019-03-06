@@ -6,23 +6,25 @@
 
 <template>
 <div class="List">
-  <mu-list>
-    <mu-sub-header>今天</mu-sub-header>
+  <mu-list textline="two-line">
     <template v-for="(item, index) in journeyList">
-      <mu-list-item :title="item.name" :key="index" @click="journeyInfo(item._id)">
-        <mu-avatar src="/images/avatar1.jpg" slot="leftAvatar"/>
-        <span slot="describe" >
-          <span style="color: rgba(0, 0, 0, .87)">Myron Liu -</span> {{item.discription}}
-        </span>
-        <mu-icon-menu slot="right" icon="more_vert" tooltip="操作">
-          <mu-menu-item title="查看" />
-          <mu-menu-item title="收藏" />
-        </mu-icon-menu>
+      <mu-list-item avatar :ripple="false" button :key="item._id">
+        <mu-list-item-content @click="journeyInfo(item._id)">
+          <mu-list-item-title>{{item.name}}</mu-list-item-title>
+          <mu-list-item-sub-title style="color: rgba(0, 0, 0, .87)">{{item.userName}}</mu-list-item-sub-title>
+          <mu-list-item-sub-title>
+            {{item.direction}}
+          </mu-list-item-sub-title>
+        </mu-list-item-content>
+        <mu-list-item-action >
+          <mu-list-item-after-text>15 min</mu-list-item-after-text>
+          <mu-checkbox color="yellow700" v-model="selects" value="value1" uncheck-icon="star_border" checked-icon="star"></mu-checkbox>
+        </mu-list-item-action>
       </mu-list-item>
-      <mu-divider inset/>
+      <mu-divider :key="index"></mu-divider>
     </template>
+
   </mu-list>
-  <!--<mu-infinite-scroll :scroller="scroller" :loading="loading" loadingText='加载中...' @load="loadMore"/>-->
 </div>
 </template>
 
@@ -37,7 +39,8 @@ export default {
     return {
       loading: false,
       scroller: null,
-      journeyList: []
+      journeyList: [],
+      selects:[]
     }
   },
   mounted () {

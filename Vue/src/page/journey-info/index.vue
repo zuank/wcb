@@ -28,8 +28,7 @@
       {{discription}}
     </mu-card-text>
     <mu-card-actions>
-      <mu-flat-button @click="updateJourneyInfo" label="Action 1"/>
-      <mu-flat-button label="Action 2"/>
+      <mu-button color="primary" @click="updateJourneyInfo">加入</mu-button>
     </mu-card-actions>
   </mu-card>
 </div>

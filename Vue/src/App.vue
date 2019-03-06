@@ -1,17 +1,13 @@
 <template>
   <div class="app">
-    <mu-appbar title="WCB">
-      <!-- <mu-icon-button v-show="route.name !== 'Login'" icon="menu" slot="left"/> -->
-    </mu-appbar>
+    <mu-appbar style="width: 100%;" title="WCB"></mu-appbar>
     <div class="content">
       <router-view></router-view>
     </div>
     <mu-paper class="paper-bottom" v-show="route.name !== 'Login'">
-      <mu-bottom-nav :value="bottomNav" shift @change="handleChange">
-        <mu-bottom-nav-item value="movies" title="Movies" icon="ondemand_video"/>
-        <mu-bottom-nav-item value="music" title="Music" icon="music_note"/>
-        <mu-bottom-nav-item value="books" title="Books" icon="books"/>
-        <mu-bottom-nav-item value="pictures" title="Pictures" icon="photo"/>
+      <mu-bottom-nav :value="route.name" shift @change="handleChange">
+        <mu-bottom-nav-item value="JourneyList" title="ALL" icon="view_list"/>
+        <mu-bottom-nav-item value="person" title="MY" icon="person"/>
       </mu-bottom-nav>
     </mu-paper>
   </div>
@@ -23,7 +19,7 @@ export default {
   name: 'App',
   data(){
     return {
-      bottomNav: 'movies'
+      bottomNav: ''
     }
   },
   computed: {
@@ -31,7 +27,9 @@ export default {
   },
   methods: {
     handleChange (val) {
-      this.bottomNav = val
+      this.$router.push({
+        name: val
+      })
     }
   },
   created() {
