@@ -29,7 +29,7 @@ module.exports = (app, db) => {
                 } else {
                     res.status(200).json({
                         status: -1,
-                        msg: '注册失败'
+                        msg: '发布失败'
                     })
                 }
             });
@@ -221,7 +221,7 @@ module.exports = (app, db) => {
                 } else {
                     res.status(200).json({
                         status: 1,
-                        error: '行程不存在'
+                        error: '加入失败'
                     });
                 }
             });
