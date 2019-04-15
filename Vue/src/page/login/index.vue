@@ -48,7 +48,7 @@
         }).then(response => {
           if (response.data.status === 0) {
             this.$toast.success('登录成功');
-            this.$router.push('publishedList');
+            this.$router.push('journey-list');
           }
         }, response => {
           // error callback

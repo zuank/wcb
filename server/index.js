@@ -1,13 +1,9 @@
 const express = require('express');
-// const http = require('http');;
-// const httpProxy = require('http-proxy')
-// const configIO = require('./io');
 const api = require('./api');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const settings = require('./settings');
-const path = require('path');
 const cookie = require('cookie-parser');
 
 const app = express();
