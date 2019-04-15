@@ -33,14 +33,22 @@
     computed: {
       ...mapState(['route','user'])
     },
-    created(){
-      if (this.user.userId) {
-        this.$router.push({
-          name: 'JourneyList'
-        })
+    watch:{
+      'user':function () {
+        this.watchUser();
       }
     },
+    mounted(){
+      this.watchUser();
+    },
     methods: {
+      watchUser(){
+        if (this.user.userId) {
+          this.$router.push({
+            name: 'JourneyList'
+          })
+        }
+      },
       goLogin() {
         this.$http.post('/api/login', {
           userName: this.userName,

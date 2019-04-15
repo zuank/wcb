@@ -8,6 +8,7 @@ import 'muse-ui/dist/muse-ui.css'
 import theme from 'muse-ui/lib/theme';
 import toast from 'muse-ui-toast';
 import axios from './utils/axios'
+import './assets/css/common.css'
 
 
 toast.config( {

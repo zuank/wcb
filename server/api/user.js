@@ -28,6 +28,7 @@ module.exports = (app, db) => {
         error: '密码不能为空'
       });
     }
+    console.log(req.body);
       db.collection('user', (error, collection) => {
         if (error) {
           return;

@@ -1,16 +1,27 @@
 <template>
   <div class="app">
-    <mu-appbar style="width: 100%;" title="WCB"></mu-appbar>
-    <div class="content">
-      <router-view></router-view>
-    </div>
-    <mu-paper class="paper-bottom" v-show="route.name !== 'Login'">
-      <mu-bottom-nav :value="route.name" shift @change="handleChange">
-        <mu-bottom-nav-item value="JourneyList" title="ALL JOURNEY" icon="view_list"/>
-        <mu-bottom-nav-item value="journeyAdd" title="ADD JOURNEY" icon="playlist_add"/>
-        <mu-bottom-nav-item value="person" title="MY" icon="person"/>
-      </mu-bottom-nav>
-    </mu-paper>
+    <mu-flex justify-content="center">
+      <div class="content">
+        <mu-appbar color="primary">
+          <mu-button icon slot="left" @click="open=true">
+            <mu-icon value="menu"></mu-icon>
+          </mu-button>
+          {{route.meta.title}}
+        </mu-appbar>
+        <router-view></router-view>
+      </div>
+    </mu-flex>
+    <!--悬浮菜单栏-->
+    <mu-drawer :open.sync="open" :docked="docked">
+      <mu-list>
+        <mu-list-item button v-for="(item,index) in routerList" v-if="checkMendShow(item)" @click="jump(item)" :key="index">
+          <mu-list-item-action>
+            <mu-icon :value="item.meta.icon"></mu-icon>
+          </mu-list-item-action>
+          <mu-list-item-title>{{item.meta.title}}</mu-list-item-title>
+        </mu-list-item>
+      </mu-list>
+    </mu-drawer>
   </div>
 </template>
 
@@ -20,17 +31,35 @@ export default {
   name: 'App',
   data(){
     return {
-      bottomNav: ''
+      open: false,
+      docked: false,
     }
   },
   computed: {
-    ...mapState(['route'])
+    ...mapState(['route','user']),
+    routerList:{
+      get() {
+        if (this.route) {
+          return this.$router.options.routes[0].children
+        }
+        return []
+      }
+    }
   },
   methods: {
-    handleChange (val) {
-      this.$router.push({
-        name: val
-      })
+    // 菜单展示逻辑
+    checkMendShow(route) {
+      if (route.meta.show) {
+        if (route.meta.needLogin&&!this.user.userId) {
+          return false;
+        }
+        return true
+      }
+      return false
+    },
+    jump(route){
+      this.open = false;
+      this.$router.push(route);
     }
   },
   created() {
@@ -40,25 +69,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.app {
-  .mu-appbar {
-    text-align: center;
-    position: fixed;
-    top: 0;
-  }
-  .content {
-    overflow: auto;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: 56px 0;
-  }
-  .paper-bottom {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
+.content {
+  width: 100%;
+  min-height: 100%;
 }
 </style>
