@@ -79,6 +79,26 @@ export default new Router({
           show: false,
           needLogin: true
         }
+      }, {
+        path: 'user-info',
+        name: 'UserInfo',
+        component: () => import('@/page/user-detail'),
+        meta:{
+          title:'个人中心',
+          icon: '',
+          show: true,
+          needLogin: true
+        }
+      }, {
+        path: 'user-info-edit',
+        name: 'UserInfoEdit',
+        component: () => import('@/page/user-detail-edit'),
+        meta:{
+          title:'个人中心',
+          icon: '',
+          show: false,
+          needLogin: true
+        }
       }]
     }
   ]

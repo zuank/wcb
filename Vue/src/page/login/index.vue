@@ -55,6 +55,8 @@
           password: this.password,
         }).then(response => {
           if (response.data.status === 0) {
+            // 获取用户信息
+            this.$store.dispatch('getUserInfo');
             this.$toast.success('登录成功');
             this.$router.push('journey-list');
           }

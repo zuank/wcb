@@ -38,6 +38,8 @@ export function getUserInfo({
   vm.$http.get('/api/user/info').then(response => {
     if (response.data.status === 0){
       commit('UPDATE_USER_INFO', response.data.result);
+    } else {
+      window.location = '/';
     }
   }, response => {
   })
