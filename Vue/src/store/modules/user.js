@@ -1,10 +1,10 @@
 export default {
-  state: {
-    userName: ''
-  },
-  mutations: {
-    'UPDATE_USER_NAME' (state, bol) {
-      state.userName = bol;
+    state: {
+        userName: ''
+    },
+    mutations: {
+        'UPDATE_USER_NAME' (state, bol) {
+            state.userName = bol;
+        }
     }
-  }
 };
