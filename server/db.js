@@ -1,8 +1,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const settings = require('./settings');
 
-async function collection() {
-    await MongoClient.connect(`mongodb://${settings.host}:${settings.port}/${settings.db}`, {}, function (err, db) {
+function collection() {
+    MongoClient.connect(`mongodb://${settings.host}:${settings.port}/${settings.db}`, {}, function (err, db) {
         if (err) {
             console.log('连接失败！');
             return {};
@@ -25,4 +25,4 @@ async function collection() {
     });
 }
 
-module.exports =  collection();
+module.exports = collection();
