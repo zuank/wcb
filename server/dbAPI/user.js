@@ -1,10 +1,6 @@
 const db = require('../db');
 const dbName = 'user';
 
-
-if (1!==2){
-    return
-}
 function journeyInsert(params, successCallback, errorCallback) {
     db.collection(dbName, (error, collection) => {
         if (error) {
