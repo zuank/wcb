@@ -43,6 +43,9 @@ export default {
             this.userInfo = {...value}
         }
     },
+    mounted(){
+        this.userInfo = {...this.user}
+    },
     methods:{
         toPublish(){
             this.$http.post('/api/user/update',this.userInfo).then(response => {

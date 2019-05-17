@@ -59,6 +59,7 @@ module.exports = {
         // @fixable 禁止出现 foo['bar']，必须写成 foo.bar
         // @off 当需要写一系列属性的时候，可以更统一
         'dot-notation': 'off',
+        'no-console': 'off',
         // @fixable 必须使用 === 或 !==，禁止使用 == 或 !=，与 null 比较时除外
         eqeqeq: [
             'off',
