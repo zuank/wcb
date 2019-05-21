@@ -90,8 +90,5 @@ export default {
             this.$router.push('/')
         }
     },
-    created() {
-        console.log(this)
-    }
 }
 </script>

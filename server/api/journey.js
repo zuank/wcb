@@ -195,7 +195,7 @@ module.exports = (app, db) => {
 
     /**
      * 加入到别人发布的行程中
-     * id  当前登录用户的userId
+     * id  行程ID
      * req: {
      *
      * }
@@ -226,5 +226,18 @@ module.exports = (app, db) => {
                 }
             });
         });
+
+        db.collection('user', (error, collection)=>{
+            if (error){
+                return
+            }
+            collection.update({
+                _id: ObjectId(req.session.userId)
+            }, {
+                $addToSet: {
+                    'joinedJourneyList': ObjectId(req.params.id)
+                }
+            })
+        })
     });
 };

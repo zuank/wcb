@@ -1,6 +1,4 @@
 <style lang="less" scoped>
-.JourneyEdit {
-}
 </style>
 
 <template>
@@ -67,9 +65,6 @@ export default {
                     if (response.data.status === 0) {
                         Object.assign(this, response.data.result)
                     }
-                },
-                response => {
-                    // error callback
                 }
             )
         },
@@ -80,9 +75,6 @@ export default {
                     if (response.data.status === 0) {
                         this.getJourneyInfo()
                     }
-                },
-                response => {
-                    // error callback
                 }
             )
         }
