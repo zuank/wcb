@@ -1,19 +1,5 @@
 const ObjectId = require('mongodb').ObjectID
 
-function checkLogin(req, res, next) {
-    if (!req.session.userName) {
-        req.flash('error', '用户未登录！')
-        res.redirect('/')
-    }
-    next()
-}
-function checkNotLogin(req, res, next) {
-    if (req.session.userName) {
-        req.flash('error', '用户已登录！')
-    }
-    next()
-}
-
 module.exports = (app, db) => {
     app.post('/api/reg', (req, res) => {
         if (req.body.userName === '') {
