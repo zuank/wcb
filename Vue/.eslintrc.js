@@ -22,6 +22,7 @@ module.exports = {
             flatTernaryExpressions: true
         }
     ],
+    'no-console': 'off',
     'no-tabs': 'off',
     // @fixable html 的结束标签必须符合规定
     // @off 有的标签不必严格符合规定，如 <br> 或 <br/> 都应该是合法的

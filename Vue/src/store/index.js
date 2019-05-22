@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import * as Login from './actions/Login'
+import * as User from './actions/user'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -13,7 +13,7 @@ export default new Vuex.Store({
 
     },
     actions: {
-        ...Login
+        ...User
     },
     mutations: {
         'UPDATE_USER_INFO' (state, info) {

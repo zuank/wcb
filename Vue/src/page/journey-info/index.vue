@@ -16,7 +16,7 @@
                            :subTitle="tel" />
             <mu-card-text>
                 <p>
-                    出发时间:{{goDate}}
+                    出发时间:{{goDate | formatDate('YY-MM-DD HH:MM:SS')}}
                 </p>
                 <p>
                     返回时间:{{backDate}}
@@ -40,6 +40,7 @@ import { mapState } from 'vuex'
 export default {
     name: 'journey-info',
     created() {
+        console.log(this)
         this.getJourneyInfo()
     },
     data() {

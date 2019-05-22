@@ -11,7 +11,7 @@
 
 <template>
     <div class="user-detail">
-        <mu-card style="width: 100%; max-width: 375px; margin: 0 auto;">
+        <mu-card>
             <mu-card-header :title="user.userName"
                             sub-title="">
                 <mu-avatar slot="avatar">

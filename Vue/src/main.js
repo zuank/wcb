@@ -8,6 +8,7 @@ import theme from 'muse-ui/lib/theme'
 import toast from 'muse-ui-toast'
 import axios from './utils/axios'
 import './assets/css/common.css'
+import * as filter_ from './utils/filter'
 
 toast.config({
     position: 'top', // 弹出的位置
@@ -19,6 +20,12 @@ toast.config({
     warningIcon: 'priority_high', // 提醒信息图标
     errorIcon: 'warning' // 错误信息图标
 })
+
+for (const key in filter_) {
+    if (filter_.hasOwnProperty(key)) {
+        Vue.filter(key, filter_[key])
+    }
+}
 
 Vue.prototype.$http = axios
 Vue.prototype.$toast = toast
